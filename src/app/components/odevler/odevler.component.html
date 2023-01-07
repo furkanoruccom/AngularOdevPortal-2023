@@ -1,0 +1,104 @@
+<div class="container py-3">
+    <h4 class="mb-4">Ödevler Sayfası</h4>
+
+    <!-- Button trigger modal -->
+    <div class="row">
+        <div class="col-2">
+            <button class="btn btn-outline-danger mb-3" (click)="Ekle(modalEkleDuzenle)">Kayıt Ekle</button>
+        </div>
+        <div class="col-10">
+            <select class="form-control" [(ngModel)]="dersId" (ngModelChange)="DersSec($event)">
+                <option [value]="" selected>Tüm Dersler</option>
+                <option [value]="kat.id" *ngFor="let kat of dersler">{{kat.dersadi}}</option>
+            </select>        
+        </div>
+    </div>
+    <table class="table table-bordered">
+        <thead>
+            <tr>
+                <th>Ödev Adı</th>
+                <th>Eklenme Tarihi</th>
+                <th>Düzenlenme Tarihi</th>
+                <th>İşlemler</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let odev of odevler">
+                <td>{{odev.odevadi}}</td>
+                <td>{{odev.kayittarihi | date:'dd.MM.yyyy HH:mm:ss'}}</td>
+                <td>{{odev.duzenlenmetarihi | date:'dd.MM.yyyy HH:mm:ss'}}</td>
+                <td style="width: 300px;">
+                    <div class="row g-1">
+                        <div class="col-4">
+                            <button class="btn btn-danger btn-sm w-100" (click)="Sil(odev,modalSil)">Sil</button>
+                        </div>
+                        <div class="col-4">
+                            <button class="btn btn-warning btn-sm w-100"
+                                (click)="Duzenle(odev, modalEkleDuzenle)">Düzenle</button>
+                        </div>
+                        <div class="col-4">
+                            <button class="btn btn-info btn-sm w-100"  [routerLink]="['/odevDetay',odev.id]">Detay</button>
+                        </div>
+                    </div>
+                </td> 
+            </tr>
+        </tbody>
+    </table>
+</div>
+
+
+
+
+
+<div class="modal" tabindex="-1" #modalEkleDuzenle>
+    <div class="modal-dialog modal-xl">
+        <div class="modal-content">
+            <div class="modal-header text-white">
+                <h5 class="modal-title"></h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <form [formGroup]="frm" (ngSubmit)="odevEkleDuzenle()">
+                <div class="modal-body">
+                    <div class="form-floating mb-3">
+                        <input type="text" class="form-control" id="floatingInput" formControlName="odevadi">
+                        <label for="floatingInput">Ödev Adı</label>
+                    </div>
+                    <div class="form-floating mb-3">
+                        <input type="text" class="form-control" id="floatingInput1" formControlName="detail">
+                        <label for="floatingInput1">Ödev Detay</label>
+                    </div>
+                    <div class="form-floating mb-3">
+                        <select name="" id="floatingInput2" class="form-control" formControlName="dersId">
+                            <option [value]="kat.id" *ngFor="let kat of dersler">{{kat.dersadi}}</option>
+                        </select>
+                        <label for="floatingInput2">Ödev Hangi Derse Ait</label>
+                    </div>
+                    <input type="hidden" class="form-control" formControlName="id">
+                </div>
+                <div class="modal-footer">
+                    <input type="submit" class="btn btn-primary" value="Kaydet">
+                    <button type="button" class="btn btn-outline-primary" data-bs-dismiss="modal">Kapat</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<div class="modal" tabindex="-1" #modalSil>
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header bg-danger text-white">
+                <h5 class="modal-title">{{modalBaslik}}</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <h6>adlı Ders Silinecektir Onaylıyor musunuz?</h6>
+            </div>
+            <div class="modal-footer">
+
+                <button class="btn btn-outline-danger" *ngIf="secOdev" (click)="OdevSil()">Sil</button>
+                <button type="button" class="btn btn-outline-primary" data-bs-dismiss="modal">Kapat</button>
+            </div>
+        </div>
+    </div>
+</div>

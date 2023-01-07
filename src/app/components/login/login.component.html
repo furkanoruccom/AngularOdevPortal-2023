@@ -1,0 +1,13 @@
+<form class="login-box">
+    <div class="mb-3">
+        <label for="text" class="form-label">Mail Adresi</label>
+        <input type="text" required #email  class="form-control">
+    </div>
+    <div class="mb-3">
+        <label for="password" class="form-label">Şifre</label>
+        <input type="password" required #password class="form-control">
+    </div>
+
+    <button type="submit" class="btn btn-primary" (click)="KullaniciGiris(email.value, password.value)" >Giriş Yap</button>
+    <button type="submit" class="btn btn-warning ms-2" (click)="kullaniciKayit(email.value, password.value)" >Kayıt Ol</button>
+</form>

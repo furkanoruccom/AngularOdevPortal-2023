@@ -1,0 +1,44 @@
+<header>
+  <div class="px-3 py-2 text-bg-dark">
+    <div class="container">
+      <div class="d-flex flex-wrap align-items-center justify-content-center justify-content-lg-start">
+        <a [routerLink]="['/anasayfa']" class="d-flex align-items-center my-2 my-lg-0 me-lg-auto text-white text-decoration-none">
+          <svg class="bi me-2" width="40" height="32" role="img" aria-label="Bootstrap"><use xlink:href="#bootstrap"/></svg>
+        </a>
+
+        <ul class="nav col-12 col-lg-auto my-2 justify-content-center my-md-0 text-small">
+          <li>
+            <a [routerLink]="['/anasayfa']" class="nav-link text-white text-center">
+              Anasayfa
+            </a>
+          </li>
+          <li>
+            <a [routerLink]="['/dersler']"  class="nav-link text-white">
+              Dersler
+            </a>
+          </li>
+          <li>
+            <a [routerLink]="['/odevler']"  class="nav-link text-white">
+              Ödevler
+            </a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+  <div class="px-3 py-2 border-bottom mb-3">
+    <div class="container d-flex flex-wrap justify-content-center">
+      <div class="col-12 col-lg-auto mb-2 mb-lg-0 me-lg-auto" >
+        <h6 class="mb-0 mt-2">Admin Panel</h6>
+      </div>
+
+      <div class="text-end">
+        <button type="button" [routerLink]="['/giris']"  class="btn btn-warning text-white me-2">Giriş Yap & Kayıt Ol</button>
+        <button type="button" class="btn btn-primary" (click)="servis.OturumKapat()" *ngIf="servis.OturumKontrol()">Çıkış Yap</button>
+      </div>
+    </div>
+  </div>
+</header>
+<router-outlet>
+
+</router-outlet>

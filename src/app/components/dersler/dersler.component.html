@@ -1,0 +1,89 @@
+<div class="container py-3">
+    <h4 class="mb-5">Dersler Sayfası</h4>
+    <!-- Button trigger modal -->
+    <button class="btn btn-outline-danger mb-4" (click)="Ekle(modalEkleDuzenle)">Kayıt Ekle</button>
+
+    <table class="table table-bordered">
+        <thead>
+            <tr>
+                <th>id</th>
+                <th>Eklenme Tarihi</th>
+                <th>Düzenlenme Tarihi</th>
+                <th>İşlemler</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let ders of dersler">
+                <td>{{ders.dersadi}}</td>
+                <td>{{ders.kayittarihi | date:'dd.MM.yyyy HH:mm:ss'}}</td>
+                <td>{{ders.duzenlenmetarihi | date:'dd.MM.yyyy HH:mm:ss'}}</td>
+                <td style="width: 200px;">
+                    <div class="row g-1">
+                        <div class="col-6">
+                            <button class="btn btn-danger btn-sm w-100" (click)="Sil(ders,modalSil)">Sil</button>
+                        </div>
+                        <div class="col-6">
+                            <button class="btn btn-warning btn-sm w-100"
+                                (click)="Duzenle(ders, modalEkleDuzenle)">Düzenle</button>
+                        </div>
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+
+
+
+
+
+<div class="modal" tabindex="-1" #modalEkleDuzenle>
+    <div class="modal-dialog modal-xl">
+        <div class="modal-content">
+            <div class="modal-header text-white">
+                <h5 class="modal-title"></h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <form [formGroup]="frm" (ngSubmit)="dersEkleDuzenle()">
+                <div class="modal-body">
+                    <div class="form-floating mb-3">
+                        <input type="text" class="form-control" id="floatingInput" formControlName="dersadi">
+                        <label for="floatingInput">Ders Adı</label>
+                    </div>
+                    <div class="form-floating mb-3">
+                        <input type="text" class="form-control" id="floatingInput1" formControlName="derskredi">
+                        <label for="floatingInput1">Ders Kredi</label>
+                    </div>
+                    <div class="form-floating mb-3">
+                        <input type="text" class="form-control" id="floatingInput2" formControlName="dersdetail">
+                        <label for="floatingInput2">Ders Detay</label>
+                    </div>
+                    <input type="hidden" class="form-control" formControlName="id">
+                </div>
+                <div class="modal-footer">
+                    <input type="submit" class="btn btn-primary" value="Kaydet">
+                    <button type="button" class="btn btn-outline-primary" data-bs-dismiss="modal">Kapat</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<div class="modal" tabindex="-1" #modalSil>
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header bg-danger text-white">
+                <h5 class="modal-title">{{modalBaslik}}</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <h6>adlı Ders Silinecektir Onaylıyor musunuz?</h6>
+            </div>
+            <div class="modal-footer">
+
+                <button class="btn btn-outline-danger" *ngIf="secDers" (click)="DersSil()">Sil</button>
+                <button type="button" class="btn btn-outline-primary" data-bs-dismiss="modal">Kapat</button>
+            </div>
+        </div>
+    </div>
+</div>
