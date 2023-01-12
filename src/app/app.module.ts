@@ -18,6 +18,7 @@ import { getAuth } from '@firebase/auth';
 import { RouteReuseStrategy } from '@angular/router';
 import { AuthService } from 'src/service/auth.service';
 import { HomeComponent } from './components/home/home.component';
+import { KullanicilarComponent } from './components/kullanicilar/kullanicilar.component';
 
 
 @NgModule({
@@ -28,6 +29,7 @@ import { HomeComponent } from './components/home/home.component';
     OdevDetayComponent,
     LoginComponent,
     HomeComponent,
+    KullanicilarComponent,
  
     
   ],

@@ -1,0 +1,89 @@
+<div class="container py-3">
+    <h4 class="mb-4">Kullanıcılar Sayfası</h4>
+
+    <!-- Button trigger modal -->
+    <div class="row">
+        <div class="col-2">
+            <button class="btn btn-outline-danger mb-3" (click)="Ekle(modalEkleDuzenle)">Kayıt Ekle</button>
+        </div>
+        <div class="col-10">
+        </div>
+    </div>
+    <table class="table table-bordered">
+        <thead>
+            <tr>
+                <th>Üye Adı</th>
+                <th>Mail</th>
+                <th>İşlemler</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let kullanici of kullanicilar">
+                <td>{{kullanici.name}}</td>
+                <td>{{kullanici.mail}}</td>
+                <td style="width: 300px;">
+                    <div class="row g-1">
+                        <div class="col-12">
+                            <button class="btn btn-danger btn-sm w-100" (click)="Sil(kullanici,modalSil)">Sil</button>
+                        </div>
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+
+
+
+
+
+<div class="modal" tabindex="-1" #modalEkleDuzenle>
+    <div class="modal-dialog modal-xl">
+        <div class="modal-content">
+            <div class="modal-header text-white">
+                <h5 class="modal-title"></h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <form [formGroup]="frm" (ngSubmit)="kullaniciEkleDuzenle()">
+                <div class="modal-body">
+                    <div class="form-floating mb-3">
+                        <input type="text" class="form-control" id="floatingInput" formControlName="name">
+                        <label for="floatingInput">Adınız SoyAdınız</label>
+                    </div>
+                    <div class="form-floating mb-3">
+                        <input type="email" class="form-control" id="floatingInput1" formControlName="mail">
+                        <label for="floatingInput1">Mail</label>
+                    </div>
+                    <div class="form-floating mb-3">
+                        <input type="password" class="form-control" id="floatingInput2" formControlName="password">
+                        <label for="floatingInput2">Şifre</label>
+                    </div>
+                    <input type="hidden" class="form-control" formControlName="id">
+                </div>
+                <div class="modal-footer">
+                    <input type="submit" class="btn btn-primary" value="Kaydet">
+                    <button type="button" class="btn btn-outline-primary" data-bs-dismiss="modal">Kapat</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<div class="modal" tabindex="-1" #modalSil>
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header bg-danger text-white">
+                <h5 class="modal-title">{{modalBaslik}}</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <h6>adlı Ders Silinecektir Onaylıyor musunuz?</h6>
+            </div>
+            <div class="modal-footer">
+
+                <button class="btn btn-outline-danger" *ngIf="secKullanici" (click)="KullaniciSil()">Sil</button>
+                <button type="button" class="btn btn-outline-primary" data-bs-dismiss="modal">Kapat</button>
+            </div>
+        </div>
+    </div>
+</div>

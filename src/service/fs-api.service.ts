@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { AngularFirestore } from '@angular/fire/compat/firestore';
 import { Ders } from 'src/models/Ders';
+import { Kullanicilar } from 'src/models/Kullanicilar';
 import { Odev } from 'src/models/Odev';
 
 @Injectable({
@@ -50,6 +51,28 @@ export class FsApiService {
   OdevSil(id: string) {
     return this.afs.collection("odevler").doc(id).delete();
   }
+
+
+  //#kullanici Odev
+  KullaniciGetir() {
+    return this.afs.collection("kullanicilar").snapshotChanges();
+  }
+  // KullaniciByIdGetir(id: string) {
+  //   return this.afs.collection("kullanicilar", q => q.where("dersId", "==", id)).snapshotChanges();
+  // }
+  KullaniciEkle(Kullanici: Kullanicilar) {
+    delete Kullanici.id
+    return this.afs.collection("kullanicilar").add(Kullanici);
+  }
+  KullaniciDuzenle(Kullanici: Kullanicilar) {
+    return this.afs.collection("kullanicilar").doc(Kullanici.id).update(Kullanici);
+  }
+  KullaniciSil(id: string) {
+    return this.afs.collection("kullanicilar").doc(id).delete();
+  }
+
+
+
 
   //Odev Detay
   DetayByOdevId(OdevId: string){
